@@ -3,19 +3,30 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 // import App from './App';
 
-// Обязательно оборачивать все эллементы в какой-то тег
-const elem = (
-  <div>
-    <h1>Hallo World!</h1>
-    <input type='text' placeholder='something' />
-  </div>
-)
+const Header = () => {
+  return <h1>Hallo World!</h1>
+}
 
-// Это равно примеру ниже
-// const elem = React.createElement('h1', null, 'Hallo World!');
+const Field = () => {
+  return <input type='text' placeholder='something' />
+}
+
+const Btn = () => {
+  return <button/>
+}
+
+const App = () => {
+  return (
+    <div>
+      <Header/>
+      <Field/>
+      <Btn/>
+    </div>
+  )
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
-  elem
+  <App/>
 );
