@@ -8,11 +8,19 @@ const Header = () => {
 }
 
 const Field = () => {
-  return <input type='text' placeholder='something' />
+  const holder = 'Enter here';
+  const styleField = {
+    width: '300px'
+  }
+
+  return <input type='text' placeholder={holder} style={styleField} />
 }
 
 const Btn = () => {
-  return <button/>
+  const text = 'Log in';
+  const logged = false;
+
+  return <button>{logged ? null : text}</button>
 }
 
 const App = () => {
