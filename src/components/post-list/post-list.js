@@ -1,5 +1,6 @@
 import React from "react";
 import PostListItem from "../list-item/list-item";
+import './post-list';
 
 const PostList = () => {
   return (
