@@ -1,6 +1,6 @@
 import React from "react";
 import PostListItem from "../list-item/list-item";
-import './post-list';
+import './post-list.scss';
 
 const PostList = ({postsList}) => {
   const elements = postsList.map((item) => {
