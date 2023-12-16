@@ -11,11 +11,13 @@ export default class App extends Component {
     super(props);
     this.state = {
       data: [
-        {label: "I'm so fun!", important: true, id: 'esavw'},
-        {label: "How are you!?", important: false, id: 'vewcew'},
-        {label: "How will go out with me?", important: false, id: 'fcverfqw'}
+        {label: "I'm so fun!", important: true, id: 1},
+        {label: "How are you!?", important: false, id: 2},
+        {label: "How will go out with me?", important: false, id: 3}
       ]
     }
+
+    this.maxId = 4;
   }
 
   deleteItem = (id) => {
@@ -25,6 +27,22 @@ export default class App extends Component {
 
       return { data: newArr };
     });
+  }
+
+  addItem = (message) => {
+    const newPost = {
+      label: message,
+      important: false,
+      id: this.maxId++
+    }
+
+    this.setState(({data}) => {
+      const newArr = [newPost,  ...data];
+
+      return {
+        data: newArr
+      }
+    })
   }
 
   render() {
@@ -39,7 +57,7 @@ export default class App extends Component {
         <PostList 
           postsList={data}
           onDelete={this.deleteItem} />
-        <PostAddForm/>
+        <PostAddForm onAdd={this.addItem}/>
       </div>
     )
   }
