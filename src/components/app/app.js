@@ -8,9 +8,9 @@ import './app.css';
 
 const App = () => {
   const data = [
-    {label: "I'm so fun!", important: true},
-    {label: "How are you?", important: true},
-    {label: "How will go out with me?", important: true}
+    {label: "I'm so fun!", important: true, id: 'esavw'},
+    {label: "How are you!?", important: false, id: 'vewcew'},
+    {label: "How will go out with me?", important: false, id: 'fcverfqw'}
   ]
 
   return (
@@ -20,7 +20,7 @@ const App = () => {
         <SearchPanel/>
         <PostStatusFilter/>
       </div>
-      <PostList props={data} />
+      <PostList postsList={data} />
       <PostAddForm/>
     </div>
   )
