@@ -14,7 +14,9 @@ export default class App extends Component {
         {label: "I'm so fun!", important: false, like: false, id: 1},
         {label: "How are you!?", important: false, like: false, id: 2},
         {label: "How will go out with me?", important: false, like: false, id: 3}
-      ]
+      ],
+
+      text: ''
     }
 
     this.maxId = 4;
@@ -75,22 +77,38 @@ export default class App extends Component {
     });
   }
 
-  render() {
-    const liked = this.state.data.filter(obj => obj.like).length;
-    const allPosts = this.state.data.length; 
+  postFilter = (items, text) => {
+    if (text === 0) {
+      return items;
+    }
 
-    const {data} = this.state;
+    return items.filter(item => item.label.toLowerCase().indexOf(text) > -1);
+  }
+
+  updateAppStateText = (text) => {
+    this.setState({text});
+  }
+
+  render() {
+    const {data, text} = this.state;
+
+    const liked = data.filter(obj => obj.like).length;
+    const allPosts = data.length;
+
+    const visiblePosts = this.postFilter(data, text);
+
     return (
       <div className="app">
         <AppHeader
           liked={liked}
           allPosts={allPosts}/>
         <div className="search-panel d-flex">
-          <SearchPanel/>
+          <SearchPanel
+            onFilter={this.updateAppStateText}/>
           <PostStatusFilter/>
         </div>
         <PostList 
-          postsList={data}
+          postsList={visiblePosts}
           onDelete={this.deleteItem}
           onToggleImportant={this.onToggleImportant}
           onToggleLiked={this.onToggleLiked} />
