@@ -1,0 +1,9 @@
+.item-list {
+    max-height: 283.8px;
+    overflow: scroll;
+    border-radius: 3px;
+
+    .list-group-item {
+        cursor: pointer;
+    }
+}

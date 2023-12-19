@@ -5,7 +5,6 @@ import RandomChar from '../randomChar';
 import ItemList from '../itemList';
 import CharDetails from '../charDetails';
 
-
 const App = () => {
     return (
         <> 
@@ -14,7 +13,7 @@ const App = () => {
             </Container>
             <Container>
                 <Row>
-                    <Col lg={{size: 5, offset: 0}}>
+                    <Col lg={{size: 6, offset: 3}}>
                         <RandomChar/>
                     </Col>
                 </Row>
