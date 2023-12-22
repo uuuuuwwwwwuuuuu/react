@@ -2,6 +2,8 @@
     background-color: #fff;
     padding: 25px 25px 15px 25px;
     margin-bottom: 40px;
+    animation-name: fadeIn;
+    animation-duration: 0.7s;
 }
 .random-block h4 {
     margin-bottom: 20px;
@@ -9,4 +11,11 @@
 }
 .term {
     font-weight: bold;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    } to {
+        opacity: 1;
+    }
 }

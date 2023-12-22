@@ -1,21 +1,28 @@
 import React, {Component} from 'react';
-import './randomChar.css';
+import './randomChar.scss';
 import GetResource from '../../services/getResource';
 import Spinner from '../spinner/spinner';
 import ErrorMessage from '../errorMessage/errorMessage';
 
 
 export default class RandomChar extends Component {
-    constructor() {
-        super();
-        this.updateCharacter();
-    }
-
     service = new GetResource();
 
     state = {
         char: {},
-        loading: true
+        loading: true,
+        timerId: null
+    }
+
+    componentDidMount() {
+        this.updateCharacter();
+        this.setState({
+            timerId: setInterval(this.updateCharacter, 4000)
+        })
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.state.timerId);
     }
 
     onCharLoaded = (char) => {
@@ -33,7 +40,7 @@ export default class RandomChar extends Component {
         })
     }
 
-    updateCharacter() {
+    updateCharacter = () => {
         let id = Math.floor(Math.random()*140 + 25);
         this.service.getCharacter(id)
             .then(this.onCharLoaded)
@@ -62,7 +69,7 @@ const View = ({char}) => {
     const {name, gender, born, died, culture} = char;
 
     return (
-        <>
+        <div className='random-char '>
             <h4>Random Character: {name}</h4>
             <ul className="list-group list-group-flush">
                 <li className="list-group-item d-flex justify-content-between">
@@ -82,6 +89,6 @@ const View = ({char}) => {
                     <span>{culture}</span>
                 </li>
             </ul>
-        </>
+        </div>
     )
 }
