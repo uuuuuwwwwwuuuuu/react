@@ -33,7 +33,6 @@ export default class CharDetails extends Component {
 
   renderChar(char) {
     const {name, gender, born, died, culture} = char;
-
     return (
       <>
         <h4>{name}</h4>

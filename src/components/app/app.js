@@ -4,6 +4,8 @@ import Header from "../header";
 import RandomChar from "../randomChar";
 import CharacterPage from "../characterPage/characterPage";
 import ErrorMessage from "../errorMessage/errorMessage";
+import ItemList from "../itemList";
+import CharDetails from "../charDetails";
 
 export default class App extends Component {
 
@@ -14,7 +16,6 @@ export default class App extends Component {
   }
 
   componentDidCatch() {
-    console.log('error');
     this.setState({error: true});
   }
 
@@ -52,6 +53,22 @@ export default class App extends Component {
             </Col>
           </Row>
           <CharacterPage />
+          {/* <Row className="mt-4">
+            <Col md="6">
+              <ItemList onSelected={this.onCharSelected}/>
+            </Col>
+            <Col md="6">
+              <CharDetails charId={this.state.selectedChar}/>
+            </Col>
+          </Row>
+          <Row className="mt-4">
+            <Col md="6">
+              <ItemList onSelected={this.onCharSelected}/>
+            </Col>
+            <Col md="6">
+              <CharDetails charId={this.state.selectedChar}/>
+            </Col>
+          </Row> */}
         </Container>
       </>
     );

@@ -3,7 +3,7 @@ export default class GetResource {
     this._apiBase = "https://www.anapioficeandfire.com/api";
   }
 
-  async getData(url) {
+  getData = async (url) => {
     const response = await fetch(`${this._apiBase}${url}`);
 
     if (!response.ok) {
@@ -13,37 +13,37 @@ export default class GetResource {
     return await response.json();
   }
 
-  async getAllCharacters() {
+  getAllCharacters = async () => {
     const res = await this.getData("/characters?page=5&pageSize=10");
     return res.map(this._transformCharacter);
   }
 
-  async getCharacter(id) {
+  getCharacter = async (id) => {
     const res = await this.getData(`/characters/${id}`);
     return this._transformCharacter(res);
   }
 
-  async getAllHouses() {
+  getAllHouses = async () => {
     const res = await this.getResource('/houses/');
     return res.map(this._transformHouse);
   }
 
-  async getHouse(id) {
+  getHouse = async (id) => {
     const res = await this.getData(`/houses/${id}`);
     return this._transformHouse(res);
   }
 
-  async getAllBooks() {
+  getAllBooks = async () => {
     const res = await this.getData('/books/');
     return res.map(this._transformBook);
   }
 
-  async getBook(id) {
+  getBook = async (id) => {
     const res = await this.getData(`/books/${id}`);
     return this._transformBook(res);
   }
 
-  _transformCharacter(char) {
+  _transformCharacter = (char) => {
     return {
       name: char.name || 'No information found',
       gender: char.gender || 'No information found',
@@ -53,7 +53,7 @@ export default class GetResource {
     }
   }
 
-  _transformHouse(house) {
+  _transformHouse = (house) => {
     return {
       name: house.name || 'No information found',
       region: house.region || 'No information found',
@@ -64,7 +64,7 @@ export default class GetResource {
     }
   }
 
-  _transformBook (book) {
+  _transformBook = (book) => {
     return {
       name: book.name || 'No information found',
       numberOfPages: book.numberOfPages || 'No information found',

@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import "./itemList.scss";
-import GetResource from "../../services/getResource";
 import Spinner from "../spinner/spinner";
 
 export default class ItemList extends Component {
-  service = new GetResource();
 
   state = {
-    charList: null
+    itemList: null
   }
 
   renderItems(arr) {
@@ -24,14 +22,16 @@ export default class ItemList extends Component {
   }
 
   componentDidMount() {
-    this.service.getAllCharacters()
-      .then(charList => this.setState({ charList }));
+    const {getData} = this.props;
+
+    getData()
+      .then(itemList => this.setState({ itemList }));
   }
 
   render() {
-    const {charList} = this.state;
+    const {itemList} = this.state;
 
-    if (!charList) {
+    if (!itemList) {
       return (
         <ul className="item-list list-group bg-white">
           <Spinner />
@@ -39,7 +39,7 @@ export default class ItemList extends Component {
       )
     }
 
-    const items = this.renderItems(charList);
+    const items = this.renderItems(itemList);
 
     return (
       <ul className="item-list list-group bg-white">
