@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ItemList from "../itemList";
-import CharDetails from "../charDetails";
+import ItemDetails, {Field} from "../itemDetails";
 import ErrorMessage from "../errorMessage/errorMessage";
 import GetResource from "../../services/getResource";
 import RowBlock from "../RowBlock/rowBlock";
@@ -18,15 +18,13 @@ export default class HousePage extends Component {
     this.setState({error: true});
   }
 
-  onHouseSelected = (selectedChar) => {
-    this.setState({selectedChar});
+  onHouseSelected = (selectedItem) => {
+    this.setState({selectedItem});
   }
-
-  
 
   render() {
     if (this.state.error) {
-      return <ErrorMessage message={'Character page destroyed, try later'} />
+      return <ErrorMessage message={'House page destroyed, try later'} />
     }
 
     const itemList = (
@@ -37,7 +35,14 @@ export default class HousePage extends Component {
     )
 
     const charDetails = (
-      <CharDetails charId={this.state.selectedItem}/>
+      <ItemDetails 
+        getData={this.service.getHouse}
+        itemId={this.state.selectedItem}>
+          <Field field='region' label='Region'/>
+          <Field field='words' label='Words'/>
+          <Field field='titles' label='Titles'/>
+          <Field field='overlord' label='Overlord'/>
+      </ItemDetails>
     )
 
     return (

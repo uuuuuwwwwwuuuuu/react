@@ -24,23 +24,13 @@ export default class GetResource {
   }
 
   getAllHouses = async () => {
-    const res = await this.getData('/houses/');
+    const res = await this.getData('/houses?page=5&pageSize=10');
     return res.map(this._transformHouse);
   }
 
   getHouse = async (id) => {
     const res = await this.getData(`/houses/${id}`);
     return this._transformHouse(res);
-  }
-
-  getAllBooks = async () => {
-    const res = await this.getData('/books/');
-    return res.map(this._transformBook);
-  }
-
-  getBook = async (id) => {
-    const res = await this.getData(`/books/${id}`);
-    return this._transformBook(res);
   }
   
   _transformCharacter = (char) => {
@@ -61,15 +51,6 @@ export default class GetResource {
       titles: house.titles || 'No information found',
       overlord: house.overlord || 'No information found',
       ancestralWeapons: house.ancestralWeapons || 'No information found'
-    }
-  }
-
-  _transformBook = (book) => {
-    return {
-      name: book.name || 'No information found',
-      numberOfPages: book.numberOfPages || 'No information found',
-      publiser: book.publiser || 'No information found',
-      released: book.released || 'No information found'
     }
   }
 }

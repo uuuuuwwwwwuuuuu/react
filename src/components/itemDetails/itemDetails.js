@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./charDetails.css";
+import "./itemDetails.css";
 import ErrorMessage from "../errorMessage/errorMessage";
 
 const Field = ({item, field, label}) => {
@@ -13,7 +13,7 @@ const Field = ({item, field, label}) => {
 
 export {Field};
 
-export default class CharDetails extends Component {
+export default class itemDetails extends Component {
 
   state = {
     item: null,
@@ -24,18 +24,18 @@ export default class CharDetails extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.charId !== prevProps.charId) {
+    if (this.props.itemId !== prevProps.itemId) {
       this.update();
     }
   }
 
   update() {
-    const {charId} = this.props
-    if (!charId) {
+    const {itemId} = this.props
+    if (!itemId) {
       return;
     }
     const {getData} = this.props
-    getData(charId)
+    getData(itemId)
       .then(item => {
         this.setState({item});
       });
