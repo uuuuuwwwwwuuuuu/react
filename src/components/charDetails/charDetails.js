@@ -2,6 +2,17 @@ import React, { Component } from "react";
 import "./charDetails.css";
 import ErrorMessage from "../errorMessage/errorMessage";
 
+const Field = ({item, field, label}) => {
+  return (
+    <li className="list-group-item d-flex justify-content-between">
+      <span className="term">{label}</span>
+      <span>{item[field]}</span>
+    </li>
+  )
+}
+
+export {Field};
+
 export default class CharDetails extends Component {
 
   state = {
@@ -31,27 +42,16 @@ export default class CharDetails extends Component {
   }
 
   renderChar(item) {
-    const {name, gender, born, died, culture} = item;
+    const {name} = item;
     return (
       <>
         <h4>{name}</h4>
         <ul className="list-group list-group-flush">
-          <li className="list-group-item d-flex justify-content-between">
-            <span className="term">Gender</span>
-            <span>{gender}</span>
-          </li>
-          <li className="list-group-item d-flex justify-content-between">
-            <span className="term">Born</span>
-            <span>{born}</span>
-          </li>
-          <li className="list-group-item d-flex justify-content-between">
-            <span className="term">Died</span>
-            <span>{died}</span>
-          </li>
-          <li className="list-group-item d-flex justify-content-between">
-            <span className="term">Culture</span>
-            <span>{culture}</span>
-          </li>
+          {
+            React.Children.map(this.props.children, (child) => {
+              return React.cloneElement(child, {item});
+            })
+          }
         </ul>
       </>
     )
