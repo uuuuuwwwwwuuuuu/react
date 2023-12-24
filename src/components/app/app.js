@@ -6,7 +6,7 @@ import CharacterPage from "../characterPage/characterPage";
 import ErrorMessage from "../errorMessage/errorMessage";
 import GetResource from "../../services/getResource";
 import HousePage from "../housePage/housePage";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 export default class App extends Component {
   state = {
@@ -40,23 +40,27 @@ export default class App extends Component {
     }
 
     return (
-      <>
-        <Container>
-          <Header />
-        </Container>
-        <Container>
-          <Row>
-            <Col lg={{ size: 6, offset: 3 }} className='d-flex flex-column'>
-              {this.state.randomCharContent}
-              <Button outline color="info" onClick={this.toggleRandomCharActive}>
-                Toggle enable random character block
-              </Button>
-            </Col>
-          </Row>
-          <CharacterPage />
-          <HousePage />
-        </Container>
-      </>
+      <Router>
+        <div className="app">
+          <Container>
+            <Header />
+          </Container>
+          <Container>
+            <Row>
+              <Col lg={{ size: 6, offset: 3 }} className='d-flex flex-column'>
+                {this.state.randomCharContent}
+                <Button outline color="info" onClick={this.toggleRandomCharActive}>
+                  Toggle enable random character block
+                </Button>
+              </Col>
+            </Row>
+            <Routes>
+              <Route path="/characters" exact element={<CharacterPage />} /> {/* exact - что бы он искал именно этот путь */}
+              <Route path="/houses" exact element={<HousePage />} />
+            </Routes>
+          </Container>
+        </div>
+      </Router>
     );
   }
 }
