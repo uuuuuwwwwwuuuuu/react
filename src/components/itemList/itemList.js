@@ -4,14 +4,24 @@ import GetResource from "../../services/getResource";
 import Spinner from "../spinner/spinner";
 
 export default class ItemList extends Component {
-
   service = new GetResource();
 
   state = {
     charList: null
   }
 
-  
+  renderItems(arr) {
+    return arr.map((item, index) => {
+      return (
+        <li 
+          key={index} 
+          className="list-group-item" 
+          onClick={ () => this.props.onSelected(41 + index)}>
+          {item.name}
+        </li>
+      )
+    })
+  }
 
   componentDidMount() {
     this.service.getAllCharacters()
@@ -21,23 +31,20 @@ export default class ItemList extends Component {
   render() {
     const {charList} = this.state;
 
-    const content = !charList ? <Spinner /> : <View charList={charList} />
+    if (!charList) {
+      return (
+        <ul className="item-list list-group bg-white">
+          <Spinner />
+        </ul>
+      )
+    }
+
+    const items = this.renderItems(charList);
 
     return (
-      <ul className="item-list list-group">
-        {/* <li className="list-group-item">John Snow</li>
-        <li className="list-group-item">Brandon Stark</li>
-        <li className="list-group-item">Geremy Smith</li> */}
-        {content}
+      <ul className="item-list list-group bg-white">
+        {items}
       </ul>
     );
   }
-}
-
-function View({charList}) {
-  return charList.map((item, index) => {
-    return (
-      <li key={index} className="list-group-item">{item.name}</li>
-    )
-  })
 }

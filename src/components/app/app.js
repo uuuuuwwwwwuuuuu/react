@@ -2,14 +2,20 @@ import React, { Component } from "react";
 import { Col, Row, Container, Button } from "reactstrap";
 import Header from "../header";
 import RandomChar from "../randomChar";
-import ItemList from "../itemList";
-import CharDetails from "../charDetails";
+import CharacterPage from "../characterPage/characterPage";
+import ErrorMessage from "../errorMessage/errorMessage";
 
 export default class App extends Component {
 
   state = {
     randomCharActive: false,
-    randomCharContent: <RandomChar />
+    randomCharContent: <RandomChar />,
+    error: false
+  }
+
+  componentDidCatch() {
+    console.log('error');
+    this.setState({error: true});
   }
 
   toggleRandomCharActive = () => {
@@ -25,6 +31,11 @@ export default class App extends Component {
   };
 
   render() {
+
+    if (this.state.error) {
+      return <ErrorMessage message={'App destroyed, try later'} />
+    }
+
     return (
       <>
         <Container>
@@ -40,14 +51,7 @@ export default class App extends Component {
               </Button>
             </Col>
           </Row>
-          <Row className="mt-4">
-            <Col md="6">
-              <ItemList />
-            </Col>
-            <Col md="6">
-              <CharDetails />
-            </Col>
-          </Row>
+          <CharacterPage />
         </Container>
       </>
     );
