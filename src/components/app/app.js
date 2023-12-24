@@ -4,16 +4,19 @@ import Header from "../header";
 import RandomChar from "../randomChar";
 import CharacterPage from "../characterPage/characterPage";
 import ErrorMessage from "../errorMessage/errorMessage";
+import GetResource from "../../services/getResource";
 import ItemList from "../itemList";
 import CharDetails from "../charDetails";
+import HousePage from "../housePage/housePage";
 
 export default class App extends Component {
-
   state = {
     randomCharActive: false,
     randomCharContent: <RandomChar />,
     error: false
   }
+
+  service = new GetResource()
 
   componentDidCatch() {
     this.setState({error: true});
@@ -53,22 +56,7 @@ export default class App extends Component {
             </Col>
           </Row>
           <CharacterPage />
-          {/* <Row className="mt-4">
-            <Col md="6">
-              <ItemList onSelected={this.onCharSelected}/>
-            </Col>
-            <Col md="6">
-              <CharDetails charId={this.state.selectedChar}/>
-            </Col>
-          </Row>
-          <Row className="mt-4">
-            <Col md="6">
-              <ItemList onSelected={this.onCharSelected}/>
-            </Col>
-            <Col md="6">
-              <CharDetails charId={this.state.selectedChar}/>
-            </Col>
-          </Row> */}
+          {/* <HousePage /> */}
         </Container>
       </>
     );

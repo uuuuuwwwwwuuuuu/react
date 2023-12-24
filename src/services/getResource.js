@@ -24,7 +24,7 @@ export default class GetResource {
   }
 
   getAllHouses = async () => {
-    const res = await this.getResource('/houses/');
+    const res = await this.getData('/houses/');
     return res.map(this._transformHouse);
   }
 
@@ -42,7 +42,7 @@ export default class GetResource {
     const res = await this.getData(`/books/${id}`);
     return this._transformBook(res);
   }
-
+  
   _transformCharacter = (char) => {
     return {
       name: char.name || 'No information found',

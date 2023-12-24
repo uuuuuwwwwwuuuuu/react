@@ -1,38 +1,37 @@
 import React, { Component } from "react";
 import "./charDetails.css";
-import GetResource from "../../services/getResource";
 import ErrorMessage from "../errorMessage/errorMessage";
 
 export default class CharDetails extends Component {
-  service = new GetResource();
 
   state = {
-    char: null,
+    item: null,
   };
 
   componentDidMount() {
-    this.updateChar();
+    this.update();
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.charId !== prevProps.charId) {
-      this.updateChar();
+      this.update();
     }
   }
 
-  updateChar() {
+  update() {
     const {charId} = this.props
     if (!charId) {
       return;
     }
-    this.service.getCharacter(charId)
-      .then(char => {
-        this.setState({char});
+    const {getData} = this.props
+    getData(charId)
+      .then(item => {
+        this.setState({item});
       });
   }
 
-  renderChar(char) {
-    const {name, gender, born, died, culture} = char;
+  renderChar(item) {
+    const {name, gender, born, died, culture} = item;
     return (
       <>
         <h4>{name}</h4>
@@ -60,7 +59,7 @@ export default class CharDetails extends Component {
 
   render() {
     
-    if (!this.state.char) {
+    if (!this.state.item) {
       return (
         <div className="char-details rounded">
           <ErrorMessage message="No data, select a character" />
@@ -68,7 +67,7 @@ export default class CharDetails extends Component {
       );
     }
 
-    const element = this.renderChar(this.state.char);
+    const element = this.renderChar(this.state.item);
 
     return (
       <div className="char-details rounded">

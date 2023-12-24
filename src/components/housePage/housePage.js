@@ -1,13 +1,12 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import ItemList from "../itemList";
 import CharDetails from "../charDetails";
 import ErrorMessage from "../errorMessage/errorMessage";
 import GetResource from "../../services/getResource";
 import RowBlock from "../RowBlock/rowBlock";
 
+export default class HousePage extends Component {
 
-export default class CharacterPage extends Component {
-  
   service = new GetResource();
 
   state = {
@@ -19,27 +18,26 @@ export default class CharacterPage extends Component {
     this.setState({error: true});
   }
 
-  onCharSelected = (selectedItem) => {
-    this.setState({selectedItem});
+  onHouseSelected = (selectedChar) => {
+    this.setState({selectedChar});
   }
 
-  render() {
+  
 
+  render() {
     if (this.state.error) {
       return <ErrorMessage message={'Character page destroyed, try later'} />
     }
 
     const itemList = (
       <ItemList 
-        getData={this.service.getAllCharacters}
-        renderItem={({name, gender}) => `${name} (gender: ${gender})`}
-        onSelected={this.onCharSelected}/>
+        getData={this.service.getAllHouses}
+        renderItem={({name}) => name}
+        onSelected={this.onHouseSelected}/>
     )
 
     const charDetails = (
-      <CharDetails 
-      getData={this.service.getCharacter}
-      charId={this.state.selectedItem}/>
+      <CharDetails charId={this.state.selectedItem}/>
     )
 
     return (
@@ -47,4 +45,3 @@ export default class CharacterPage extends Component {
     )
   }
 }
-
