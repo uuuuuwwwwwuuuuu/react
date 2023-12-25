@@ -1,6 +1,6 @@
 import { createStore, bindActionCreators } from "redux";
 import reducer from "./reducer";
-import {inc, dec, rnd} from './actions';
+import * as actions from './actions';
 
 const store = createStore(reducer);
 const {dispatch} = store;
@@ -10,15 +10,13 @@ const update = () => {
 };
 store.subscribe(update);
 
-const incDispatch = bindActionCreators(inc, dispatch);      //создаёт dispatch генератор
-const decDispatch = bindActionCreators(dec, dispatch);
-const rndDispatch = bindActionCreators(rnd, dispatch);
+const {inc, dec, rnd} = bindActionCreators(actions, dispatch);
 
-document.querySelector("#inc").addEventListener("click", incDispatch);
+document.querySelector("#inc").addEventListener("click", inc);
 
-document.querySelector("#dec").addEventListener("click", decDispatch);
+document.querySelector("#dec").addEventListener("click", dec);
 
 document.querySelector("#rnd").addEventListener("click", () => {
     const value = Math.floor(Math.random() * 10);
-    rndDispatch(value);
+    rnd(value);
 });
