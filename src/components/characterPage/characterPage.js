@@ -33,7 +33,8 @@ export default class CharacterPage extends Component {
       <ItemList 
         getData={this.service.getAllCharacters}
         renderItem={({name, gender}) => `${name} (gender: ${gender})`}
-        onSelected={this.onCharSelected}/>
+        // onSelected={this.onCharSelected}
+        />
     )
 
     const itemDetails = (
