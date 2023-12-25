@@ -8,6 +8,11 @@ export default class ItemList extends Component {
     itemList: null
   }
 
+
+  static defaultProps = {
+    onSelected: () => {}
+  }
+
   renderItems(arr) {
     return arr.map((item, index) => {
       const label = this.props.renderItem(item);
@@ -49,8 +54,4 @@ export default class ItemList extends Component {
       </ul>
     );
   }
-}
-
-ItemList.defaultProps = {
-  onSelected: () => {}
 }
