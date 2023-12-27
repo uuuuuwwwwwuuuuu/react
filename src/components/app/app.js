@@ -19,8 +19,6 @@ const App = () => {
                     Component={CartPage}
                     exact/>
             </Routes>
-            <MainPage/>
-            <CartPage/>
         </div>
     )
 }

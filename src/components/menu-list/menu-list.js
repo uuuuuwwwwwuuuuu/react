@@ -1,13 +1,22 @@
 import React, {Component} from 'react';
 import MenuListItem from '../menu-list-item';
+import { connect } from 'react-redux';
+import WithRestoService from '../hoc';
+import {menuLoaded} from '../../actions'
 
 import './menu-list.scss';
 
 class MenuList extends Component {
+    componentDidMount() {
+        const {RestoService, menuLoaded} = this.props;
+        RestoService.getMenu()
+            .then(res => {
+                menuLoaded(res);
+            })
+    }
 
     render() {
         const {menuItems} = this.props
-
         return (
             <ul className="menu__list">
                 {
@@ -20,5 +29,14 @@ class MenuList extends Component {
     }
 };
 
+const mapStateToProps = (state) => {
+    return {
+        menuItems: state.menu
+    }
+}
 
-export default MenuList;
+const mapDispatchToProps = {
+    menuLoaded
+}
+
+export default WithRestoService()(connect(mapStateToProps, mapDispatchToProps)(MenuList));
